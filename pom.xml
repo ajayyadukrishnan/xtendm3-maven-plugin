@@ -9,7 +9,7 @@
          
   <name>XtendM3 Maven Plugin</name>
   <description>XtendM3 Maven Plugin for linting and exporting XtendM3 Extensions locally</description>
-  <url>https://github.com/infor-cloud/xtendm3-maven-plugin/</url>
+  <url>https://github.com/ajayyadukrishnan/xtendm3-maven-plugin/</url>
 
   <licenses>
     <license>
@@ -19,9 +19,9 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:ssh://git@github.com:infor-cloud/xtendm3-maven-plugin.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:infor-cloud/xtendm3-maven-plugin.git</developerConnection>
-    <url>https://github.com/infor-cloud/xtendm3-maven-plugin/</url>
+    <connection>scm:git:ssh://git@github.com:ajayyadukrishnan/xtendm3-maven-plugin.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:ajayyadukrishnan/xtendm3-maven-plugin.git</developerConnection>
+    <url>https://github.com/ajayyadukrishnan/xtendm3-maven-plugin/</url>
   </scm>
 
   <distributionManagement>
@@ -42,6 +42,14 @@
       <email>xtendm3@infor.com</email>
       <organization>Infor</organization>
       <organizationUrl>https://www.infor.com/</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+	<developer>
+      <id>ajayyadukrishnan</id>
+      <name>Ajay Yadukrishnan Haridas</name>
+      <email>ajayyadukrishnan@gmail.com</email>
       <roles>
         <role>developer</role>
       </roles>
