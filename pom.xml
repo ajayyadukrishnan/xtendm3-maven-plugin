@@ -2,11 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.infor.m3</groupId>
+  <groupId>com.github.ajayyadukrishnan</groupId>
   <artifactId>xtendm3-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-  <version>0.1.8-SNAPSHOT</version>
-
+  <version>master-SNAPSHOT</version>
+         
   <name>XtendM3 Maven Plugin</name>
   <description>XtendM3 Maven Plugin for linting and exporting XtendM3 Extensions locally</description>
   <url>https://github.com/infor-cloud/xtendm3-maven-plugin/</url>

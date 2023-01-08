@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 public class TransactionMetadata {
   private String name;
+  private String fileName;
   private String program;
   private String description;
   private TransactionType type;

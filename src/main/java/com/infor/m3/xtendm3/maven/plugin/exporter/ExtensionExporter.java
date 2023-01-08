@@ -63,12 +63,14 @@ public class ExtensionExporter {
       for (ApiMetadata apiMetadata : metadata.getApis()) {
         for (TransactionExtensionMetadata transactionExtension : apiMetadata.getTransactions()) {
           for (File extension : extensions) {
-            if (transactionExtension.getName().equals(extension.getName().substring(0, extension.getName().indexOf('.')))) {
-              TransactionExtensionMetadata transactionExtensionMetadata = abstractXtendM3Mojo.getExtensionSourceUtils().getTransactionExtensionMetadata(metadata, extension.getName());
+	    String fileName = transactionExtension.getFileName();
+	    if(fileName == null) fileName = transactionExtension.getName();
+            if (fileName.equals(extension.getName().substring(0, extension.getName().indexOf('.')))) {
+              TransactionExtensionMetadata transactionExtensionMetadata = abstractXtendM3Mojo.getExtensionSourceUtils().getTransactionExtensionMetadata(metadata, transactionExtension.getName());
               ExtensionFactory factory = ExtensionFactory.getInstance(ExtensionType.TRANSACTION);
               if (factory != null) {
                 Extension ex = factory.create(transactionExtensionMetadata, extension);
-                toExport.put(transactionExtensionMetadata.getName(), ex);
+                toExport.put(fileName, ex);
               }
               break;
             }

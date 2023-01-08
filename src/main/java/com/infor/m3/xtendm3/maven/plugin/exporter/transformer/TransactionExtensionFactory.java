@@ -24,7 +24,7 @@ public class TransactionExtensionFactory implements ExtensionFactory {
   @Override
   public Extension create(BaseExtensionMetadata extensionMetadata, File extension) throws MojoFailureException {
     TransactionExtensionMetadata metadata = (TransactionExtensionMetadata) extensionMetadata;
-    Source source = buildSource(extension);
+    Source source = buildSource(extension, metadata);
     List<ExtMIField> inputFields = buildInputFields(metadata.getInputs());
     List<ExtMIField> outputFields = buildOutputFields(metadata.getOutputs());
     ExtMITransaction transaction = buildTransaction(metadata, source, inputFields, outputFields);
@@ -34,9 +34,11 @@ public class TransactionExtensionFactory implements ExtensionFactory {
 
   private List<ExtMIField> buildInputFields(List<TransactionFieldMetadata> inputFieldsMetadata) {
     List<ExtMIField> inputFields = new ArrayList<>();
+    
     if(inputFieldsMetadata == null || inputFieldsMetadata.isEmpty()) {
       return inputFields;
     }
+    
     for (TransactionFieldMetadata fieldMetadata : inputFieldsMetadata) {
       inputFields.add(ExtMIField.builder()
         .name(fieldMetadata.getName())
@@ -51,9 +53,11 @@ public class TransactionExtensionFactory implements ExtensionFactory {
 
   private List<ExtMIField> buildOutputFields(List<TransactionFieldMetadata> outputFieldsMetadata) {
     List<ExtMIField> outputFields = new ArrayList<>();
+    
     if(outputFieldsMetadata == null || outputFieldsMetadata.isEmpty()) {
       return outputFields;
     }
+    
     for (TransactionFieldMetadata fieldMetadata : outputFieldsMetadata) {
       outputFields.add(ExtMIField.builder()
         .name(fieldMetadata.getName())
@@ -67,15 +71,15 @@ public class TransactionExtensionFactory implements ExtensionFactory {
   }
 
 
-  private Source buildSource(File extension) throws MojoFailureException {
+  private Source buildSource(File extension, TransactionExtensionMetadata metadata) throws MojoFailureException {
     try {
       return Source.builder()
         .apiVersion(APIVersion.UNKNOWN)
         .beVersion(DEFAULT_BE_VERSION)
         .created(Instant.now().toEpochMilli())
         .updated(Instant.now().toEpochMilli())
-        .createdBy(DEFAULT_CREATOR)
-        .updatedBy(DEFAULT_UPDATER)
+        .createdBy(metadata.getCreatedBy() != null && !metadata.getCreatedBy().trim().isEmpty() ? metadata.getCreatedBy() : DEFAULT_CREATOR)
+        .updatedBy(metadata.getUpdatedBy() != null && !metadata.getUpdatedBy().trim().isEmpty() ? metadata.getUpdatedBy() : DEFAULT_UPDATER)
         .uuid(UUID.randomUUID().toString())
         .code(Files.readAllBytes(extension.toPath()))
         .build();
@@ -93,7 +97,7 @@ public class TransactionExtensionFactory implements ExtensionFactory {
       .active(false)
       .multi(metadata.getType().equals(TransactionType.MULTI))
       .modified(Instant.now().toEpochMilli())
-      .modifiedBy(DEFAULT_UPDATER)
+      .modifiedBy(metadata.getUpdatedBy() != null && !metadata.getUpdatedBy().trim().isEmpty() ? metadata.getUpdatedBy() : DEFAULT_UPDATER)
       .sourceUuid(source.getUuid())
       .outputFields(outputFields)
       .inputFields(inputFields)

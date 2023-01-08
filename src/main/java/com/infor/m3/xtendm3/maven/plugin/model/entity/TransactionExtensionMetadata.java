@@ -9,6 +9,9 @@ import java.util.List;
 public class TransactionExtensionMetadata extends BaseExtensionMetadata {
   private String program;
   private String name;
+  private String fileName;
+  private String createdBy;
+  private String updatedBy;
   private String description;
   private TransactionType type;
   private List<TransactionFieldMetadata> inputs;
