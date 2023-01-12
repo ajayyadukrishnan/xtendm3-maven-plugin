@@ -66,7 +66,7 @@ public abstract class AbstractXtendM3Mojo extends AbstractMojo {
     GsonBuilder builder = new GsonBuilder();
     builder.registerTypeAdapter(byte[].class, (JsonSerializer<byte[]>) (src, typeOfSrc, context) -> new JsonPrimitive(Base64.getEncoder().encodeToString(src)));
     builder.registerTypeAdapter(byte[].class, (JsonDeserializer<byte[]>) (json, typeOfT, context) -> Base64.getDecoder().decode(json.getAsString()));
-    return builder.create();
+    return builder.disableHtmlEscaping().create();
   }
 
   public String getTargetDirectory() {
